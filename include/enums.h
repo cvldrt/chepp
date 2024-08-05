@@ -16,4 +16,8 @@ enum PIECE {
     pawn, knight, bishop, rook, queen, king
 };
 
+enum PLAYER {
+    white, black
+};
+
 #endif

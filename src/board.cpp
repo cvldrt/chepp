@@ -2,27 +2,13 @@
 
 #include <iostream>
 
+#include "bitboard.h"
 #include "enums.h"
-
-inline void set_bit(bitboard* board, char bit)
-{
-    *board |= (1ll << bit);
-}
-
-inline bool get_bit(bitboard board, char bit)
-{
-    return board & 1ll << bit;
-}
-
-inline void pop_bit(bitboard* board, char bit)
-{
-    *board &= !(1ll << bit);
-}
+#include "piece_masks.h"
 
 void print_bitboard(bitboard b)
 {
     for (int row = 0; row < 8; ++row) {
-
         for (int col = 0; col < 8; ++col) {
             std::cout << get_bit(b, row * 8 + col) << " ";
         }
@@ -35,24 +21,13 @@ void print_bitboard(bitboard b)
 
 Board::Board()
 {
-    white_bitboards.fill(0);
-    black_bitboards.fill(0);
+    bitboards[PLAYER::white].fill(0);
+    bitboards[PLAYER::black].fill(0);
 }
 
 void Board::print()
 {
-    print_bitboard(white_bitboards[PIECE::pawn]);
+    print_bitboard(pawn_attacks[black][a2]);
+    print_bitboard(pawn_attacks[white][e4]);
 
-    set_bit(&white_bitboards[PIECE::pawn], SQUARE::f4);
-
-    print_bitboard(white_bitboards[PIECE::pawn]);
-
-    pop_bit(&white_bitboards[PIECE::pawn], SQUARE::f4);
-
-    print_bitboard(white_bitboards[PIECE::pawn]);
-}
-
-bool Board::is_legal(const Move&) const
-{
-    return true;
 }
