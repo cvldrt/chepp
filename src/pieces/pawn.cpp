@@ -18,8 +18,18 @@ bitboard pawn_double_pushes(bitboard pawns, bitboard empty, char color)
     return push(pushed, color) & empty & double_push_row;
 }
 
-bitboard pawn_captures(bitboard pawns, bitboard enemy, SQUARE enpassant)
+bitboard pawn_captures_left(bitboard pawns, char color)
 {
-    return 0;
+    return ((pawns & 0x7f7f7f7f7f7f7f7f) << 9) >> (16 * color);
 }
 
+bitboard pawn_captures_right(bitboard pawns, char color)
+{
+    return ((pawns & 0xfefefefefefefefe) << 7) >> (16 * color);
+}
+
+bitboard pawn_captures(bitboard pawns, char color)
+{
+    return pawn_captures_left(pawns, color) |
+           pawn_captures_right(pawns, color);
+}
