@@ -5,6 +5,7 @@
 #include "bitboard.h"
 #include "enums.h"
 #include "piece_masks.h"
+#include "pieces/pawn.h"
 
 void print_bitboard(bitboard b)
 {
@@ -27,7 +28,12 @@ Board::Board()
 
 void Board::print()
 {
-    print_bitboard(pawn_attacks[black][a2]);
-    print_bitboard(pawn_attacks[white][e4]);
-
+    //print_bitboard(knight_attacks[e1]);
+    //print_bitboard(rook_mask[e4]);
+    //print_bitboard(pawn_attacks[white][e1]);
+    //print_bitboard(bishop_mask[e4]);
+    //print_bitboard(qween_mask[a1]);
+    print_bitboard(king_attacks[a1]);
+    print_bitboard(king_attacks[e4]);
+    print_bitboard(king_attacks[d8]);
 }
