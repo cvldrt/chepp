@@ -5,6 +5,8 @@
 
 typedef uint64_t bitboard;
 
+void print_bitboard(bitboard b);
+
 inline void set_bit(bitboard* board, char bit)
 {
     *board |= 1ll << (63 - bit);
