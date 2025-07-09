@@ -1,4 +1,5 @@
 #include "utils.h"
+
 #include <cassert>
 
 std::vector<std::string> split(std::string& str, char del)
@@ -20,7 +21,8 @@ std::vector<std::string> split(std::string& str, char del)
     return res;
 }
 
-SQUARE str_to_square(std::string& str){
+SQUARE str_to_square(std::string& str)
+{
     if (str == "-") return SQUARE::none;
 
     assert(str.size() == 2);
@@ -31,10 +33,12 @@ SQUARE str_to_square(std::string& str){
     // add column
     res += 8 - str[0] - 97;
 
-    return (SQUARE) res;
+    return (SQUARE)res;
 }
 
-std::string square_to_str(SQUARE sqr){
+std::string square_to_str(SQUARE sqr)
+{
     if (sqr == SQUARE::none) return "-";
-
+    // TODO
 }
+

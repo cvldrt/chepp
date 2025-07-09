@@ -61,40 +61,40 @@ Board::Board(std::string fen)
                 assert((index) % 8 == 0);
                 break;
             case 'P':
-                bitboards[PLAYER::white][PIECE::pawn] |= (1ll << index);
+                set_bit(bitboards[PLAYER::white][PIECE::pawn], index);
                 break;
             case 'p':
-                bitboards[PLAYER::black][PIECE::pawn] |= (1ll << index);
+                set_bit(bitboards[PLAYER::black][PIECE::pawn], index);
                 break;
             case 'R':
-                bitboards[PLAYER::white][PIECE::rook] |= (1ll << index);
+                set_bit(bitboards[PLAYER::white][PIECE::rook], index);
                 break;
             case 'r':
-                bitboards[PLAYER::black][PIECE::rook] |= (1ll << index);
+                set_bit(bitboards[PLAYER::black][PIECE::rook], index);
                 break;
             case 'N':
-                bitboards[PLAYER::white][PIECE::knight] |= (1ll << index);
+                set_bit(bitboards[PLAYER::white][PIECE::knight], index);
                 break;
             case 'n':
-                bitboards[PLAYER::black][PIECE::knight] |= (1ll << index);
+                set_bit(bitboards[PLAYER::black][PIECE::knight], index);
                 break;
             case 'B':
-                bitboards[PLAYER::white][PIECE::bishop] |= (1ll << index);
+                set_bit(bitboards[PLAYER::white][PIECE::bishop], index);
                 break;
             case 'b':
-                bitboards[PLAYER::black][PIECE::bishop] |= (1ll << index);
+                set_bit(bitboards[PLAYER::black][PIECE::bishop], index);
                 break;
             case 'Q':
-                bitboards[PLAYER::white][PIECE::queen] |= (1ll << index);
+                set_bit(bitboards[PLAYER::white][PIECE::queen], index);
                 break;
             case 'q':
-                bitboards[PLAYER::black][PIECE::queen] |= (1ll << index);
+                set_bit(bitboards[PLAYER::black][PIECE::queen], index);
                 break;
             case 'K':
-                bitboards[PLAYER::white][PIECE::king] |= (1ll << index);
+                set_bit(bitboards[PLAYER::white][PIECE::king], index);
                 break;
             case 'k':
-                bitboards[PLAYER::black][PIECE::king] |= (1ll << index);
+                set_bit(bitboards[PLAYER::black][PIECE::king], index);
                 break;
         }
     }
@@ -105,7 +105,7 @@ Board::Board(std::string fen)
 void add_piece(bitboard bb, char ch, char board[8][8])
 {
     for (int i = 0; i < 64; ++i) {
-        if ((1ll << i) & bb) board[i / 8][i % 8] = ch;
+        if (get_bit(bb, i)) board[i / 8][i % 8] = ch;
     }
 }
 

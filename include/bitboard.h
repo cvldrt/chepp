@@ -5,23 +5,13 @@
 
 typedef uint64_t bitboard;
 
+#define set_bit(bb, bit) (bb |= 1ll << (bit))
+#define get_bit(bb, bit) (bb & 1ll << (bit))
+#define pop_bit(bb, bit) (bb &= ~(1ll << (bit)))
+
 void print_bitboard(bitboard b);
 
-inline void set_bit(bitboard* board, char bit)
-{
-    *board |= 1ll << (63 - bit);
-}
+uint8_t count_bits(bitboard b);
 
-inline bool get_bit(bitboard board, char bit)
-{
-    return board & 1ll << (63 - bit);
-}
-
-inline void pop_bit(bitboard* board, char bit)
-{
-    *board &= ~(1ll << (63 - bit));
-}
-
-void fun();
 
 #endif
