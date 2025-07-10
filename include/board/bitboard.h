@@ -1,5 +1,4 @@
-#ifndef BITBOARD_H
-#define BITBOARD_H
+#pragma once
 
 #include <cstdint>
 
@@ -12,6 +11,3 @@ typedef uint64_t bitboard;
 void print_bitboard(bitboard b);
 
 uint8_t count_bits(bitboard b);
-
-
-#endif

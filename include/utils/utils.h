@@ -1,6 +1,6 @@
 #pragma once
 
-#include "enums.h"
+#include "board/enums.h"
 #include <string>
 #include <vector>
 

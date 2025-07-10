@@ -154,8 +154,7 @@ uint64_t find_magic(SQUARE sq, int relevant_bit_count, bool bishop)
     return 0;
 }
 
-int main()
-{
+void print_magic_numbers() {
     std::cout << "const uint64_t rook_magics[64] = {\n";
     for (int sq = 0; sq < 64; ++sq) {
         std::cout << "    "
@@ -171,6 +170,8 @@ int main()
                   << "ull,\n";
     }
     std::cout << "};\n";
+}
 
-    return 0;
+int main()
+{
 }

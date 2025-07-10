@@ -3,30 +3,40 @@ project(chepp)
 
 set(CMAKE_CXX_STANDARD 20)
 
-# Main engine sources (exclude magic generator)
-file(GLOB_RECURSE engine_sources CONFIGURE_DEPENDS "src/*.cpp")
-list(REMOVE_ITEM engine_sources "src/magic_generator.cpp")
+file(GLOB_RECURSE board_sources CONFIGURE_DEPENDS "src/board/*.cpp")
+file(GLOB_RECURSE engine_sources CONFIGURE_DEPENDS "src/engine/*.cpp")
+file(GLOB_RECURSE pieces_sources CONFIGURE_DEPENDS "src/pieces/*.cpp")
+file(GLOB_RECURSE utils_sources CONFIGURE_DEPENDS "src/utils/*.cpp")
 
-# Main engine library
-add_library(chepp_lib STATIC ${engine_sources})
-target_include_directories(chepp_lib PUBLIC "include/")
+set(sources 
+    ${board_sources}
+    ${pieces_sources}
+    ${engine_sources}
+    ${utils_sources}
+)
 
-# Main executable
-add_executable(chepp main.cpp)
-target_link_libraries(chepp PRIVATE chepp_lib)
+add_executable(chepp 
+    src/main.cpp
+    ${sources}
+)
 
-# Magic number generator (always built)
-add_executable(mgen src/magic_generator.cpp)
-target_link_libraries(mgen PRIVATE chepp_lib)
+target_include_directories(chepp PUBLIC 
+    "include/"
+    "include/board"
+    "include/engine"
+    "include/magic"
+    "include/pieces"
+    "include/utils"
+)
 
-# Optimization flag option
-option(USE_O3 "Enable -O3 optimization" OFF)
-if(USE_O3)
-    # Apply -O3 to all targets
-    target_compile_options(chepp_lib PRIVATE -O3)
-    target_compile_options(chepp PRIVATE -O3)
-    target_compile_options(mgen PRIVATE -O3)
-    message(STATUS "Using -O3 optimization")
+option(DEBUG "Disable optimization and add debug information" OFF)
+
+if(DEBUG)
+    target_compile_options(chepp PRIVATE -g)
+    message(STATUS "Added debug information")
 else()
-    message(STATUS "Using default optimization")
+    target_compile_options(chepp PRIVATE -O3)
+    message(STATUS "Using -O3 optimization")
 endif()
+
+target_compile_options(chepp PRIVATE -fconstexpr-depth=4096)

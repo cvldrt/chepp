@@ -1,4 +1,4 @@
-#include "utils.h"
+#include "utils/utils.h"
 
 #include <cassert>
 
@@ -40,5 +40,6 @@ std::string square_to_str(SQUARE sqr)
 {
     if (sqr == SQUARE::none) return "-";
     // TODO
+    return "";
 }
 

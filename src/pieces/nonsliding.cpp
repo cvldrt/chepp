@@ -1,4 +1,4 @@
-#include "pieces/pawn.h"
+#include "pieces/nonsliding.h"
 
 bitboard push(bitboard pawns, char color)
 {

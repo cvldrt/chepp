@@ -1,15 +1,15 @@
-#include "board.h"
+#include "board/board.h"
 
 #include <cassert>
 #include <iostream>
 
-#include "bitboard.h"
-#include "enums.h"
-#include "utils.h"
+#include "board/bitboard.h"
+#include "board/enums.h"
+#include "utils/utils.h"
 
-// default init with the starting posijtion
 Board::Board()
-    : Board("nbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
+    // default init with the starting position
+    : Board("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
 {
 }
 
@@ -21,7 +21,7 @@ Board::Board(std::string fen)
     auto tokens = split(fen, ' ');
 
     std::cout << tokens.size();
-    //assert(tokens.size() == 6);
+    // assert(tokens.size() == 6);
 
     // parse player to move
     to_move = tokens[1][0] == 'w' ? PLAYER::white : PLAYER::black;
@@ -47,7 +47,7 @@ Board::Board(std::string fen)
     // parse en passant quare
     en_passant = str_to_square(tokens[3]);
 
-    halfmove_clock = atoi(tokens[4].c_str());
+    halfmove_clock  = atoi(tokens[4].c_str());
     fullmove_number = atoi(tokens[5].c_str());
 
     // parse board state
@@ -145,7 +145,6 @@ void Board::print()
     std::cout << "     a   b   c   d   e   f   g   h\n\n";
     std::cout << "To move: " << (to_move ? "BLACK" : "WHITE") << "\n";
 
-
     std::cout << "Castling: ";
     bool possible_castling = white_castle_short || white_castle_long ||
                              black_castle_short || black_castle_long;
@@ -160,6 +159,6 @@ void Board::print()
     }
 
     std::cout << "En passant: " << square_to_str(en_passant) << "\n";
-    std::cout << "Halfmove clock: " << (int) halfmove_clock << "\n";
+    std::cout << "Halfmove clock: " << (int)halfmove_clock << "\n";
     std::cout << "Fullmove_number: " << fullmove_number << "\n";
 }
